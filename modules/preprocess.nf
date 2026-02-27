@@ -61,13 +61,17 @@ process fastp_single {
     script:
 
     """
-    fastp \\
+    fastplong \\
         --in1 ${fastq} \\
         --out1 ${unique_id}.fastp.fastq \\
         --json ${unique_id}.fastp.json \\
         --thread ${task.cpus} \\
         --disable_adapter_trimming \\
         --low_complexity_filter \\
+        -x \\
+        --poly_x_min_len 10 \\
+        --cut_front \\
+        --cut_tail \\
         --qualified_quality_phred 10 \\
         2> ${unique_id}.fastp.log
 
